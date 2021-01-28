@@ -40,11 +40,21 @@ public class BankAccount {
 
 
     public static boolean isEmailValid(String email){
-        if (email.indexOf('@') == -1){
+        if ((email.indexOf('@') == -1) || (email.indexOf('@') == 0)){ // the @ symbol must be present cannot be the first character
             return false;
         }
-        else {
-            return true;
+        else if (email.length() < 7){ //a@b.com, minimum length of 7 is required for a valid email address
+            return false;
         }
+        else if ((email.indexOf('.') == -1) || (email.indexOf('.') == 0)){ //the . symbol must be present and cannot be the first character
+            return false;
+        }
+        else if (email.indexOf('@') == (email.indexOf('.')-1)){ //the @ symbol cannot immediately precede the . symbol, (a@.com) is invalid.
+            return false;
+        }
+        else if (email.indexOf('.') < (email.indexOf('.')){ //the . symbol cannot come before the @ symbol in an email address
+            return false;
+        }
+        return true;
     }
 }
