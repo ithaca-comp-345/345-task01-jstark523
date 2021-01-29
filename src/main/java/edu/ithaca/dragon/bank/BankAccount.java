@@ -58,10 +58,10 @@ public class BankAccount {
         }
         email.
         //the @ symbol cannot immediately precede the . symbol, (a@.com) is invalid.
-        else if ((email.indexOf('@')) == ((email.indexOf('.'))-1)){ 
+        else if ((email.indexOf('@')) == ((email.indexOf('.')-1)){ 
             return false;
         }
-        else if (email.indexOf('.') < (email.indexOf('.')){ //the . symbol cannot come before the @ symbol in an email address
+        else if (email.indexOf('.') < (email.indexOf('@')){ //the . symbol cannot come before the @ symbol in an email address
            return false;
         }
         return true;
