@@ -56,7 +56,7 @@ public class BankAccount {
         else if ((email.indexOf('.') == -1) || (email.indexOf('.') == 0)){
             return false;
         }
-        email.
+        
         //the @ symbol cannot immediately precede the . symbol, (a@.com) is invalid.
         else if ((email.indexOf('@')) == ((email.indexOf('.')-1)){ 
             return false;
