@@ -50,15 +50,21 @@ class BankAccountTest {
 
     @Test
     void isEmailValidTest(){
-        assertTrue(BankAccount.isEmailValid( "a@b.com"));
-        assertFalse(BankAccount.isEmailValid(""));
-        assertFalse(BankAccount.isEmailValid("@b.com"));
-        assertFalse(BankAccount.isEmailValid("@.com"));
-        assertFalse(BankAccount.isEmailValid("@b.co"));
-        assertFalse(BankAccount.isEmailValid("@bcom"));
-        assertFalse(BankAccount.isEmailValid("LongestEmailEver0123456789@longemaildomain.com"));
-        assertFalse(BankAccount.isEmailValid("LongestEmailEver123456789@longemaildomain.com"));
-        assertFalse(BankAccount.isEmailValid("LongestEmailEver23456789@longemaildomain.com"));
+        assertTrue(BankAccount.isEmailValid( "a@b.com")); //Border Case: Minimum characters necessary for a valid email, as the ".com" suffix is the same amount of characters as most others.
+        assertFalse(BankAccount.isEmailValid("")); //Border Case: Bare minimum input, string of length 0 if nothing is input
+        assertFalse(BankAccount.isEmailValid("@b.com")); // Not Border Case: Equivalence Case, missing required characters
+        assertFalse(BankAccount.isEmailValid("@.com")); // Not Border Case: Equivalence Case, missing required characters
+        assertFalse(BankAccount.isEmailValid("@b.co")); // Not Border Case: Equivalence Case, missing required characters
+        assertFalse(BankAccount.isEmailValid("@bcom")); // Not Border Case: Equivalence Case, missing required characters
+        assertFalse(BankAccount.isEmailValid("LongestEmailEver0123456789@longemaildomain.com")); // Border Case: Too many characters for a valid email
+        assertFalse(BankAccount.isEmailValid("LongestEmailEver123456789@longemaildomain.com")); // Border Case: Too many characters for a valid email
+        assertFalse(BankAccount.isEmailValid("LongestEmailEver23456789@longemaildomain.com")); // Border Case: Too many characters for a valid email
+        
+        //Missing Cases
+        //Equivalency Case, having the "." Present without the "@" (ab.com)
+        //Equivalency Case, having the "." Present before the "@", (a.b@com)
+        //Equivalency Case, having the a present but not the b. (a@.com)
+        //Equivalency Case, having the "." And the "@" missing, but the a&b. (abcom)
 
 
     }
