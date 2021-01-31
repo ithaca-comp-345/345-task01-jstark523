@@ -37,14 +37,14 @@ class BankAccountTest {
         assertThrows(InsufficientFundsException.class, () -> bankAccount1.withdraw(1)); // equivalence class of positive integer greater than balance
         assertThrows(IllegalArgumentException.class, () -> bankAccount1.withdraw(-1)); // equivalence class of negative number
 
-        BankAccount bankAccount3 = new BankAccount("a@b.com", 35.6);
-        bankAccount3.withdraw(20.2); // equivalence class of positive double amount withdrawn less than positive double balance
-        assertEquals(15.4, bankAccount3.getBalance()); 
+        BankAccount bankAccount3 = new BankAccount("a@b.com", 35.50);
+        bankAccount3.withdraw(20.25); // equivalence class of positive double amount withdrawn less than positive double balance
+        assertEquals(15.25, bankAccount3.getBalance()); 
         assertThrows(InsufficientFundsException.class, () -> bankAccount3.withdraw(20.5));// equivalence class of positive double amount withdrawn greater than positive double balance
 
-        BankAccount bankAccount4 = new BankAccount("a@b.com", 35.6);
+        BankAccount bankAccount4 = new BankAccount("a@b.com", 35.75);
         bankAccount4.withdraw(20); // equivalence class of positive integer amount withdrawn less than positive double balance
-        assertEquals(15.6, bankAccount4.getBalance()); 
+        assertEquals(15.75, bankAccount4.getBalance()); 
         assertThrows(InsufficientFundsException.class, () -> bankAccount4.withdraw(20));// equivalence class of positive integer amount withdrawn greater than positive double balance
     }
 

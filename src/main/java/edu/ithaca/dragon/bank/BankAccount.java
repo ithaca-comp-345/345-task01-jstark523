@@ -30,7 +30,10 @@ public class BankAccount {
      * @post reduces the balance by amount if amount is non-negative and smaller than balance
      */
     public void withdraw (double amount) throws InsufficientFundsException{
-        if (amount <= balance){
+        if (amount < 0){
+            throw new IllegalArgumentException("Negative amount not possible");
+        }
+        else if (amount <= balance){
             balance -= amount;
         }
         else {
@@ -57,13 +60,15 @@ public class BankAccount {
             return false;
         }
         
-        //the @ symbol cannot immediately precede the . symbol, (a@.com) is invalid.
-        else if ((email.indexOf('@')) == (email.indexOf('.')-1)){ 
-            return false;
-        }
-        else if (email.indexOf('.') < (email.indexOf('@')){ //the . symbol cannot come before the @ symbol in an email address
-           return false;
-        }
+        // //the @ symbol cannot immediately precede the . symbol, (a@.com) is invalid.
+        // else if ((email.indexOf('@')) == (email.indexOf('.')-1)){ 
+        //     return false;
+        // }
+        // else if (email.indexOf('.') < (email.indexOf('@')){ //the . symbol cannot come before the @ symbol in an email address
+        //    return false;
+        // }
+        else{
         return true;
+        }
     }
 }
