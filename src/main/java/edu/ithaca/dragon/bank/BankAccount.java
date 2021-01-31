@@ -56,17 +56,9 @@ public class BankAccount {
             return false;
         }
         //the . symbol must be present and cannot be the first character
-        else if ((email.indexOf('.') == -1) || (email.indexOf('.') == 0)){
+        else if ((email.indexOf('.') == -1) || (email.indexOf('.') == 0)){ 
             return false;
         }
-        
-        // //the @ symbol cannot immediately precede the . symbol, (a@.com) is invalid.
-        // else if ((email.indexOf('@')) == (email.indexOf('.')-1)){ 
-        //     return false;
-        // }
-        // else if (email.indexOf('.') < (email.indexOf('@')){ //the . symbol cannot come before the @ symbol in an email address
-        //    return false;
-        // }
         else{
         return true;
         }

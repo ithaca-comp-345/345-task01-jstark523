@@ -56,9 +56,10 @@ class BankAccountTest {
         assertFalse(BankAccount.isEmailValid("@.com")); // Not Border Case: Equivalence Case, missing required characters
         assertFalse(BankAccount.isEmailValid("@b.co")); // Not Border Case: Equivalence Case, missing required characters
         assertFalse(BankAccount.isEmailValid("@bcom")); // Not Border Case: Equivalence Case, missing required characters
-        assertFalse(BankAccount.isEmailValid("LongestEmailEver0123456789@longemaildomain.com")); // Border Case: Too many characters for a valid email
-        assertFalse(BankAccount.isEmailValid("LongestEmailEver123456789@longemaildomain.com")); // Border Case: Too many characters for a valid email
-        assertFalse(BankAccount.isEmailValid("LongestEmailEver23456789@longemaildomain.com")); // Border Case: Too many characters for a valid email
+        assertFalse(BankAccount.isEmailValid(".@bcom")); // Not Border Case: Equivalence Case, missing required characters
+        assertFalse(BankAccount.isEmailValid("LongestEmailEver0123456789@longemaildomain.com")); // Edge Case: Too many characters for a valid email
+        assertTrue(BankAccount.isEmailValid("LongestEmailEver123456789@longemaildomain.com")); // Border Case: Max for a valid email
+        assertTrue(BankAccount.isEmailValid("LongestEmailEver23456789@longemaildomain.com")); // Edge Case: One less than max characters for a valid email
         
         //Missing Cases
         //Equivalency Case, having the "." Present without the "@" (ab.com)
