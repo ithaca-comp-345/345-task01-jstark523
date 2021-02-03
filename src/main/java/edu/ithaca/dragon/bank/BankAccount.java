@@ -28,6 +28,7 @@ public class BankAccount {
 
     /**
      * @post reduces the balance by amount if amount is non-negative and smaller than balance
+     * throw illegal argument if amount less than 0 is withdrawn
      */
     public void withdraw (double amount) throws InsufficientFundsException{
         if (amount < 0){
@@ -63,4 +64,17 @@ public class BankAccount {
         return true;
         }
     }
+    /**
+     * 
+     * @param amount to be checked if valid
+     * @return whether or not the amount is non-negative and has two decimal points or less
+     */
+    public static boolean isAmountValid(double amount){
+        return false;
+    }
 }
+// Condense isEmailValid
+// Special characters
+// Bad combos
+// One @ or .
+// characters before and after ./@

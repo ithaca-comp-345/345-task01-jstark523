@@ -37,9 +37,9 @@ class BankAccountTest {
         assertThrows(InsufficientFundsException.class, () -> bankAccount1.withdraw(1)); // equivalence class of positive integer greater than balance
         assertThrows(IllegalArgumentException.class, () -> bankAccount1.withdraw(-1)); // equivalence class of negative number
 
-        BankAccount bankAccount3 = new BankAccount("a@b.com", 35.50);
-        bankAccount3.withdraw(20.25); // equivalence class of positive double amount withdrawn less than positive double balance
-        assertEquals(15.25, bankAccount3.getBalance()); 
+        BankAccount bankAccount3 = new BankAccount("a@b.com", 35.32);
+        bankAccount3.withdraw(20.18); // equivalence class of positive double amount withdrawn less than positive double balance
+        assertEquals(15.14, bankAccount3.getBalance()); 
         assertThrows(InsufficientFundsException.class, () -> bankAccount3.withdraw(20.5));// equivalence class of positive double amount withdrawn greater than positive double balance
 
         BankAccount bankAccount4 = new BankAccount("a@b.com", 35.75);
@@ -78,6 +78,21 @@ class BankAccountTest {
         assertEquals(200, bankAccount.getBalance());
         //check for exception thrown correctly
         assertThrows(IllegalArgumentException.class, ()-> new BankAccount("", 100));
+    }
+
+    @Test
+    void isAmountValidTest(){
+        assertTrue(BankAccount.isAmountValid(16.20)); //Equivalence Class: Valid Positive Double with two decimal places
+        assertTrue(BankAccount.isAmountValid(8.6)); //Equivalence Class: Valid Positive Double with one decimal place
+        assertTrue(BankAccount.isAmountValid(3)); //Equivalence Class: Valid Positive Double with 0 decimal places (essentially an int)
+        assertTrue(BankAccount.isAmountValid(0)); //Border Case: on the border between positive and negative Equivalence Class: Valid non-negative Double with 0 decimal places (essentially an int)
+        assertFalse(BankAccount.isAmountValid(-1)); //Equivalence Class: Invalid Negative Double with 0 decimal places (essentially an int)
+        assertFalse(BankAccount.isAmountValid(-11.6)); //Equivalence Class: Invalid Negative Double with 1 decimal place
+        assertFalse(BankAccount.isAmountValid(-23.67)); //Equivalence Class: Invalid Negative Double with 2 decimal places
+        assertFalse(BankAccount.isAmountValid(16.204)); //Equivalence Class: Invalid Positive Double with three decimal places
+        assertFalse(BankAccount.isAmountValid(12.540)); //Equivalence Class: Invalid Positive Double with three decimal places with the third being 0
+        assertFalse(BankAccount.isAmountValid(-37.675)); //Equivalence Class: Invalid Negative Double with 3 decimal places
+        assertFalse(BankAccount.isAmountValid(-87.210)); //Equivalence Class: Invalid Negative Double with three decimal places with the third being 0 
     }
 
 }
