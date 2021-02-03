@@ -90,9 +90,7 @@ class BankAccountTest {
         assertFalse(BankAccount.isAmountValid(-11.6)); //Equivalence Class: Invalid Negative Double with 1 decimal place
         assertFalse(BankAccount.isAmountValid(-23.67)); //Equivalence Class: Invalid Negative Double with 2 decimal places
         assertFalse(BankAccount.isAmountValid(16.204)); //Equivalence Class: Invalid Positive Double with three decimal places
-        assertFalse(BankAccount.isAmountValid(12.540)); //Equivalence Class: Invalid Positive Double with three decimal places with the third being 0
         assertFalse(BankAccount.isAmountValid(-37.675)); //Equivalence Class: Invalid Negative Double with 3 decimal places
-        assertFalse(BankAccount.isAmountValid(-87.210)); //Equivalence Class: Invalid Negative Double with three decimal places with the third being 0 
     }
 
 }

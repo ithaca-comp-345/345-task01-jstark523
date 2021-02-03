@@ -70,7 +70,23 @@ public class BankAccount {
      * @return whether or not the amount is non-negative and has two decimal points or less
      */
     public static boolean isAmountValid(double amount){
-        return false;
+        String amountStr = String.valueOf(amount);
+        if(amount < 0){
+            return false;
+        }
+        else if (amountStr.indexOf('.') == -1 ){
+            return true;
+        }
+        else{
+            String decimal = amountStr.substring(amountStr.indexOf('.') + 1);
+            if(decimal.length() > 2){
+                return false;
+            }
+            else{
+                return true;
+            }
+        }
+
     }
 }
 // Condense isEmailValid
