@@ -46,6 +46,12 @@ class BankAccountTest {
         bankAccount4.withdraw(20); // equivalence class of positive integer amount withdrawn less than positive double balance
         assertEquals(15.75, bankAccount4.getBalance()); 
         assertThrows(InsufficientFundsException.class, () -> bankAccount4.withdraw(20));// equivalence class of positive integer amount withdrawn greater than positive double balance
+        assertThrows(IllegalArgumentException.class, () -> bankAccount4.withdraw(-5.2));
+        assertThrows(IllegalArgumentException.class, () -> bankAccount4.withdraw(-12.36));
+        assertThrows(IllegalArgumentException.class, () -> bankAccount4.withdraw(-27.874));
+        assertThrows(IllegalArgumentException.class, () -> bankAccount4.withdraw(53.923));
+
+
     }
 
     @Test
@@ -76,8 +82,23 @@ class BankAccountTest {
 
         assertEquals("a@b.com", bankAccount.getEmail());
         assertEquals(200, bankAccount.getBalance());
+
+        BankAccount bankAccount1 = new BankAccount("a@b.com", 23.2);
+        assertEquals(23.2, bankAccount1.getBalance());
+        BankAccount bankAccount2 = new BankAccount("a@b.com", 35.67);
+        assertEquals(35.67, bankAccount2.getBalance());
         //check for exception thrown correctly
         assertThrows(IllegalArgumentException.class, ()-> new BankAccount("", 100));
+        assertThrows(IllegalArgumentException.class, ()-> new BankAccount("a@b.com", -5));
+        assertThrows(IllegalArgumentException.class, ()-> new BankAccount("a@b.com", 15.232));
+        assertThrows(IllegalArgumentException.class, ()-> new BankAccount("a@b.com", -5.1));
+        assertThrows(IllegalArgumentException.class, ()-> new BankAccount("a@b.com", -9.63));
+        assertThrows(IllegalArgumentException.class, ()-> new BankAccount("a@b.com", -20.381));
+
+
+
+
+
     }
 
     @Test
