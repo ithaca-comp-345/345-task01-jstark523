@@ -66,14 +66,20 @@ class BankAccountTest {
         assertFalse(BankAccount.isEmailValid("LongestEmailEver0123456789@longemaildomain.com")); // Edge Case: Too many characters for a valid email
         assertTrue(BankAccount.isEmailValid("LongestEmailEver123456789@longemaildomain.com")); // Border Case: Max for a valid email
         assertTrue(BankAccount.isEmailValid("LongestEmailEver23456789@longemaildomain.com")); // Edge Case: One less than max characters for a valid email
-        
-        //Missing Cases
-        //Equivalency Case, having the "." Present without the "@" (ab.com)
-        //Equivalency Case, having the "." Present before the "@", (a.b@com)
-        //Equivalency Case, having the a present but not the b. (a@.com)
-        //Equivalency Case, having the "." And the "@" missing, but the a&b. (abcom)
-
-
+        assertFalse(BankAccount.isEmailValid("aaa.bcom"));//Equivalency Case, having the "." Present without the "@"
+        assertFalse(BankAccount.isEmailValid( "~a@b.com"));//Equivalency Case, no special characters other than @ allowed
+        assertFalse(BankAccount.isEmailValid( "!a@b.com"));//Equivalency Case, no special characters other than @ allowed
+        assertFalse(BankAccount.isEmailValid( "#a@b.com"));//Equivalency Case, no special characters other than @ allowed
+        assertFalse(BankAccount.isEmailValid( "$a@b.com"));//Equivalency Case, no special characters other than @ allowed
+        assertFalse(BankAccount.isEmailValid( "%a@b.com"));//Equivalency Case, no special characters other than @ allowed
+        assertFalse(BankAccount.isEmailValid( "^a@b.com"));//Equivalency Case, no special characters other than @ allowed
+        assertFalse(BankAccount.isEmailValid( "&a@b.com"));//Equivalency Case, no special characters other than @ allowed
+        assertFalse(BankAccount.isEmailValid( "*a@b.com"));//Equivalency Case, no special characters other than @ allowed
+        assertFalse(BankAccount.isEmailValid( "(a@b.com"));//Equivalency Case, no special characters other than @ allowed
+        assertFalse(BankAccount.isEmailValid( ")a@b.com"));//Equivalency Case, no special characters other than @ allowed
+        assertFalse(BankAccount.isEmailValid( "_a@b.com"));//Equivalency Case, no special characters other than @ allowed
+        assertFalse(BankAccount.isEmailValid( "+a@b.com"));//Equivalency Case, no special characters other than @ allowed
+        assertFalse(BankAccount.isEmailValid( "~a.b@com"));//Equivalency Case, @ must be before .
     }
 
     @Test

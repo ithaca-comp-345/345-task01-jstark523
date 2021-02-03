@@ -31,6 +31,7 @@ public class BankAccount {
         return email;
     }
 
+    //I also fixed the javadoc below based on feedback
     /**
      * @post reduces the balance by amount if amount is non-negative and smaller than balance
      * throw illegal argument if amount less than 0 is withdrawn
@@ -89,16 +90,20 @@ public class BankAccount {
         if ((email.indexOf('@') == -1) || (email.indexOf('@') == 0)){ 
             return false;
         }
-        //a@b.com, minimum length of 7 is required for a valid email address
-        else if (email.length() < 7){ 
-            return false;
-        }
-        //maximum length of 45 is required for valid email address
-        else if (email.length() > 45){
+        //a@b.com, minimum length of 7 is required for a valid email address;maximum length of 45 is required for valid email address
+        else if ((email.length() < 7) || (email.length() > 45)){ 
             return false;
         }
         //the . symbol must be present and cannot be the first character
         else if ((email.indexOf('.') == -1) || (email.indexOf('.') == 0)){ 
+            return false;
+        }
+        //the . symbol cannot be before the @
+        else if ((email.indexOf ('.') < email.indexOf('@'))){
+            return false;
+        }
+        //the email shouldn't contain special characters
+        else if((email.indexOf('~') != -1) || (email.indexOf('!') != -1) ||(email.indexOf('#') != -1) ||(email.indexOf('$') != -1) ||(email.indexOf('%') != -1) || (email.indexOf('^') != -1) ||(email.indexOf('&') != -1) ||(email.indexOf('*') != -1) ||(email.indexOf('(') != -1) ||(email.indexOf(')') != -1) ||(email.indexOf('_') != -1) ||(email.indexOf('+') != -1)){
             return false;
         }
         else{
@@ -130,8 +135,3 @@ public class BankAccount {
 
     }
 }
-// Condense isEmailValid
-// Special characters
-// Bad combos
-// One @ or .
-// characters before and after ./@
