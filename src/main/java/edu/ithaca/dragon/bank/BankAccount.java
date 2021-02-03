@@ -57,7 +57,7 @@ public class BankAccount {
      * 
      * @param amount to be transferred from your account to the other
      * @param otherAccount to transfer the amount to
-     * must throw illegal argument error if amount is less than 0 and/or has more than 2 decimal points
+     * must throw illegal argument error if amount is less than 0 and/or has more than 2 decimal points or if same bankAccount is utilized
      * must throw insufficient fund error if amount to transfer is less than balance
      */
     public void transfer(double amount, BankAccount otherAccount){}

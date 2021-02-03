@@ -110,8 +110,50 @@ class BankAccountTest {
         assertFalse(BankAccount.isAmountValid(-1)); //Equivalence Class: Invalid Negative Double with 0 decimal places (essentially an int)
         assertFalse(BankAccount.isAmountValid(-11.6)); //Equivalence Class: Invalid Negative Double with 1 decimal place
         assertFalse(BankAccount.isAmountValid(-23.67)); //Equivalence Class: Invalid Negative Double with 2 decimal places
-        assertFalse(BankAccount.isAmountValid(16.204)); //Equivalence Class: Invalid Positive Double with three decimal places
-        assertFalse(BankAccount.isAmountValid(-37.675)); //Equivalence Class: Invalid Negative Double with 3 decimal places
+        assertFalse(BankAccount.isAmountValid(16.204)); //Equivalence Class: Invalid Positive Double with more than 2 decimal places
+        assertFalse(BankAccount.isAmountValid(-37.675)); //Equivalence Class: Invalid Negative Double with more than 2 decimal places
+    }
+
+    @Test
+    void depositTest(){
+        BankAccount bankAccount = new BankAccount("a@b.com", 200);
+        bankAccount.deposit(100.2); 
+        assertEquals(300.2, bankAccount.getBalance());//equivalence class of valid positive double with one decimal place
+        bankAccount.deposit(5.23);
+        assertEquals(305.43, bankAccount.getBalance());//equivalence class of valid positive double with two decimal place
+        bankAccount.deposit(0);//border case; equivalence class of valid non-negative number
+        assertEquals(305.43, bankAccount.getBalance());
+        assertThrows(IllegalArgumentException.class, () -> bankAccount.deposit(476.456));//equivalence class of invalid positive double with more than 2 decimal places
+        assertThrows(IllegalArgumentException.class, () -> bankAccount.deposit(-1));//equivalence class of invalid negative double with 0 decimal places (essentially int)
+        assertThrows(IllegalArgumentException.class, () -> bankAccount.deposit(-21.3));//equivalence class of invalid negative double with 1 decimal places 
+        assertThrows(IllegalArgumentException.class, () -> bankAccount.deposit(-14.63));//equivalence class of invalid negative double with 2 decimal places 
+        assertThrows(IllegalArgumentException.class, () -> bankAccount.deposit(-48.102));//equivalence class of invalid negative double with more than 2 decimal places 
+    }
+
+
+    @Test
+    void transferTest(){
+        BankAccount bankAccount = new BankAccount("a@b.com", 200);
+        BankAccount bankAccount2 = new BankAccount("a@b.com", 50);
+        bankAccount.transfer(50, bankAccount2);//equivalence class of valid positive double with no decimal place and sufficient funds
+        assertEquals(150, bankAccount.getBalance());//equivalence class of valid positive double with no decimal place and sufficient funds
+        assertEquals(100, bankAccount2.getBalance());
+        assertThrows(IllegalArgumentException.class, () -> bankAccount.transfer(200, bankAccount));//equivalence class of invalid arguments because the transfer account and the target account are the same
+        bankAccount.transfer(30.6, bankAccount2);//equivalence class of valid positive double with one decimal place and sufficient funds
+        assertEquals(119.4, bankAccount.getBalance());
+        assertEquals(130.6, bankAccount2.getBalance());
+        bankAccount.transfer(19.42, bankAccount2);//equivalence class of valid positive double with two decimal places and sufficient funds
+        assertEquals(99.98, bankAccount.getBalance());
+        assertEquals(150.2, bankAccount2.getBalance());
+        assertThrows(IllegalArgumentException.class, () -> bankAccount.transfer(80.874, bankAccount2));//equivalence class of invalid arguments because the amount is has more than two decimal points
+        bankAccount.transfer(0, bankAccount2);//border case of 0; equivalence class of valid non-negative argument
+        assertEquals(99.98, bankAccount.getBalance());
+        assertEquals(150.2, bankAccount2.getBalance());
+        assertThrows(IllegalArgumentException.class, () -> bankAccount.transfer(-1, bankAccount2));//equivalence class of invalid arguments because the amount is negative
+        assertThrows(IllegalArgumentException.class, () -> bankAccount.transfer(-12.3, bankAccount2));//equivalence class of invalid arguments because the amount is negative and has 1 decimal point
+        assertThrows(IllegalArgumentException.class, () -> bankAccount.transfer(-23.42, bankAccount2));//equivalence class of invalid arguments because the amount is negative and has 2 decimal points
+        assertThrows(IllegalArgumentException.class, () -> bankAccount.transfer(-833.872, bankAccount2));//equivalence class of invalid arguments because the amount is negative and has more than 2 decimal points
+        assertThrows(InsufficientFundsException.class, () -> bankAccount.transfer(300.21, bankAccount2));// equivalence class of invalid amount entered because funds are too low to cover it
     }
 
 }
