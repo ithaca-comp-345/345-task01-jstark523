@@ -51,16 +51,37 @@ public class BankAccount {
      * @param amount to be deposited
      * must throw illegal argument error if amount is less than 0 and/or has more than 2 decimal points
      */
-    public void deposit(double amount){}
-
+    public void deposit(double amount){
+        if (BankAccount.isAmountValid(amount) == false){
+            throw new IllegalArgumentException("Amount entered is not possible to be deposited");
+        }
+        else{
+            balance += amount;
+        }
+    }
     /**
      * 
      * @param amount to be transferred from your account to the other
+     * @param transferAccount to transfer the amount from
      * @param otherAccount to transfer the amount to
      * must throw illegal argument error if amount is less than 0 and/or has more than 2 decimal points or if same bankAccount is utilized
      * must throw insufficient fund error if amount to transfer is less than balance
      */
-    public void transfer(double amount, BankAccount otherAccount){}
+    public void transfer(double amount, BankAccount transferAccount, BankAccount otherAccount)throws InsufficientFundsException{
+        if (BankAccount.isAmountValid(amount) == false){
+            throw new IllegalArgumentException("Amount entered is not possible to be deposited");
+        }
+        else if (transferAccount == otherAccount){
+            throw new IllegalArgumentException("Cannot transfer to the same account");
+        }
+        else if (amount > transferAccount.balance){
+            throw new InsufficientFundsException("Not enough money");
+        }
+        else{
+            transferAccount.balance -= amount;
+            otherAccount.balance += amount;
+        }
+    }
 
 
     public static boolean isEmailValid(String email){
